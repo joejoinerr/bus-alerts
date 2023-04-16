@@ -1,5 +1,3 @@
-import os
-
 import httpx
 
 from alerts import ServiceAlert
