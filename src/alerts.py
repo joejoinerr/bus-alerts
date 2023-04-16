@@ -80,11 +80,22 @@ class FirstBusAlertService:
     ALERT_URL = "https://rsshub.app/twitter/user/FirstWestYorks/readable=0&excludeReplies=1&includeRts=0"
     AUTHORITY_NAME = "First Bus"
 
-    def __init__(self, service_list: list | set | None = None):
+    def __init__(
+        self,
+        service_list: list | set | None = None,
+        min_alert_time: datetime.datetime | None = None,
+    ):
         self.service_list = set() if not service_list else set(service_list)
         self.html_converter = html2text.HTML2Text()
         self.html_converter.ignore_links = True
         self.html_converter.ignore_images = True
+        if isinstance(min_alert_time, datetime.datetime):
+            self.min_alert_time = min_alert_time
+        else:
+            today = datetime.date.today()
+            self.min_alert_time = datetime.datetime.combine(
+                today, datetime.datetime.min.time()
+            )
 
     def _parse_alert(self, tweet_data: dict) -> ServiceAlert:
         tweet_text = self.html_converter.handle(tweet_data["summary"]).strip()
@@ -102,14 +113,12 @@ class FirstBusAlertService:
     def find_alerts(self) -> Iterable[ServiceAlert]:
         xml = fetch_text_from_url(self.ALERT_URL)
         rss = feedparser.parse(xml)
-        today = datetime.date.today()
-        today = datetime.datetime.combine(today, datetime.datetime.min.time())
         for tweet in rss.entries:
             if "service update" not in tweet.title.lower():
                 continue
             pub_timestamp = time.mktime(tweet.published_parsed)
             pub_date = datetime.datetime.fromtimestamp(pub_timestamp)
-            if pub_date < today:
+            if pub_date < self.min_alert_time:
                 continue
             alert = self._parse_alert(tweet)
             relevant_services = (
