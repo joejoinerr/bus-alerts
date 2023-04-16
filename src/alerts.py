@@ -92,9 +92,7 @@ class FirstBusAlertService:
         )
 
     def find_alerts(self) -> Iterable[ServiceAlert]:
-        # xml = fetch_text_from_url(self.ALERT_URL)
-        with open("rss.xml") as f:
-            xml = f.read()
+        xml = fetch_text_from_url(self.ALERT_URL)
         rss = feedparser.parse(xml)
         today = datetime.date.today()
         today = datetime.datetime.combine(today, datetime.datetime.min.time())
