@@ -10,6 +10,7 @@ python = "^3.10"
 httpx = "^0.24.0"
 feedparser = "^6.0.10"
 requests-html = "^0.10.0"
+html2text = "^2020.1.16"
 
 
 [build-system]

@@ -227,6 +227,18 @@ files = [
 ]
 
 [[package]]
+name = "html2text"
+version = "2020.1.16"
+description = "Turn HTML into equivalent Markdown-structured text."
+category = "main"
+optional = false
+python-versions = ">=3.5"
+files = [
+    {file = "html2text-2020.1.16-py3-none-any.whl", hash = "sha256:c7c629882da0cf377d66f073329ccf34a12ed2adf0169b9285ae4e63ef54c82b"},
+    {file = "html2text-2020.1.16.tar.gz", hash = "sha256:e296318e16b059ddb97f7a8a1d6a5c1d7af4544049a01e261731d2d5cc277bbb"},
+]
+
+[[package]]
 name = "httpcore"
 version = "0.17.0"
 description = "A minimal low-level HTTP client."
@@ -686,4 +698,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "82dfe908121e9e7a4529f478c89b7197690536833d8825904c37aa6752e7d921"
+content-hash = "c52830960cbd8f732907ad9eb84f2a5ce0e6f5e6e872fe425aa4d2d692d903c1"
