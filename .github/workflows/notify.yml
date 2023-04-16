@@ -1,0 +1,30 @@
+name: Run backup
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '58 5 * * *'  # At 05:58
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo content
+        uses: actions/checkout@v3
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'poetry'
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Execute py script
+        env:
+          PUSHBULLET_API_KEY: ${{ secrets.PUSHBULLET_API_KEY }}
+        run: poetry run python src/main.py
