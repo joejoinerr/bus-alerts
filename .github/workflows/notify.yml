@@ -1,4 +1,4 @@
-name: Run backup
+name: Send notifications
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
     - cron: '58 5 * * *'  # At 05:58
 
 jobs:
-  build:
+  run:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo content
