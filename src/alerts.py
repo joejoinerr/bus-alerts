@@ -5,6 +5,7 @@ import datetime
 import re
 
 import feedparser
+import html2text as html2text
 import httpx
 import requests_html
 
@@ -76,14 +77,21 @@ class WYMetroAlertService:
 
 
 class FirstBusAlertService:
-    ALERT_URL = "https://nitter.net/FirstWestYorks/rss"
+    ALERT_URL = "https://rsshub.app/twitter/user/FirstWestYorks/readable=0&excludeReplies=1&includeRts=0"
     AUTHORITY_NAME = "First Bus"
 
     def __init__(self, service_list: list | set | None = None):
         self.service_list = set() if not service_list else set(service_list)
+        self.html_converter = html2text.HTML2Text()
+        self.html_converter.ignore_links = True
+        self.html_converter.ignore_images = True
 
     def _parse_alert(self, tweet_data: dict) -> ServiceAlert:
-        tweet_title, tweet_description = tweet_data["title"].split("\n\n", maxsplit=1)
+        tweet_text = self.html_converter.handle(tweet_data["summary"]).strip()
+        tweet_text = "\n".join(
+            text.strip() for text in tweet_text.split("\n", maxsplit=1) if text
+        )
+        tweet_title, tweet_description = tweet_text.split("\n", maxsplit=1)
         affected_services = set(BUS_REGEX.findall(tweet_title))
         return ServiceAlert(
             authority=self.AUTHORITY_NAME,
