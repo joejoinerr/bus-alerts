@@ -23,7 +23,7 @@ class PushbulletNotifier:
 
     def notify(self, alert: ServiceAlert):
         data = {
-            "type": "note",
+            "type": "link" if alert.link else "note",
             "title": (
                 f"\N{Bus} Service alert for {alert.authority}: "
                 f'{", ".join(alert.affected_services)}'
@@ -33,11 +33,9 @@ class PushbulletNotifier:
 
         if alert.link:
             data["url"] = alert.link
-            data["type"] = "link"
             data["body"] += "\n\nTap for more information."
         if self.device_id:
             data["device_iden"] = self.device_id
 
         headers = {"Access-Token": self.key}
-
         httpx.post(self.PUSHBULLET_PUSH_URL, json=data, headers=headers)
