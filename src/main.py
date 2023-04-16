@@ -4,22 +4,17 @@ from alerts import WYMetroAlertService, FirstBusAlertService
 from notifiers import ConsoleNotifier, PushbulletNotifier
 
 
-SERVICES = {"4"}
-
-
 def main():
-    wymetro_ignore = {
-        "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/newstationstbishopgatest/",
-        "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/city-square/",
-    }
+    services = {"2", "3", "3A"}
+    wymetro_ignore = set()
 
     alert_services = [
-        WYMetroAlertService(service_list=SERVICES, ignore_list=wymetro_ignore),
-        FirstBusAlertService(service_list=SERVICES),
+        WYMetroAlertService(service_list=services, ignore_list=wymetro_ignore),
+        FirstBusAlertService(service_list=services),
     ]
 
     notifiers = [
-        ConsoleNotifier(),
+        # ConsoleNotifier(),
         PushbulletNotifier(
             key=os.environ["PUSHBULLET_API_KEY"], device_id="ujD4MLyzAqGsjyDuV8VNkq"
         ),
