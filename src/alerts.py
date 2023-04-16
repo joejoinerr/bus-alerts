@@ -49,7 +49,8 @@ class WYMetroAlertService:
         alert_link = alert_heading.find("a", first=True).attrs["href"]
         alert_link = self.DOMAIN + alert_link.removeprefix(self.DOMAIN)
         services_text = alert_html.find("p", first=True).text
-        alert_description = alert_heading.text + alert_html.find("p")[-1].text
+        alert_description = alert_html.find("p")[-1].text
+        alert_description = f"{alert_heading.text}\n{alert_description}"
         return ServiceAlert(
             authority=self.AUTHORITY_NAME,
             link=alert_link,
