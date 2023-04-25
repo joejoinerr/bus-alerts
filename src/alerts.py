@@ -1,8 +1,8 @@
-import time
 from collections.abc import Iterable
 import dataclasses
 import datetime
 import re
+import time
 
 import feedparser
 import html2text as html2text
@@ -14,8 +14,19 @@ BUS_REGEX = re.compile(r"\b[a-zA-Z]*\d+[a-zA-Z]*\b")
 
 
 def fetch_text_from_url(url: str) -> str:
-    res = httpx.get(url, headers={"user-agent": requests_html.user_agent()})
-    return res.text
+    attempts: int = 3
+    backoff: int = 1
+    for i in range(1, attempts + 1):
+        try:
+            res = httpx.get(url, headers={"user-agent": requests_html.user_agent()})
+            return res.text
+        except httpx.TransportError as e:
+            if i == attempts:
+                raise
+            time.sleep(backoff)
+            backoff *= 2
+            continue
+
 
 
 @dataclasses.dataclass
