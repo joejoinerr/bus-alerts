@@ -3,7 +3,7 @@ name: Send notifications
 on:
   workflow_dispatch:
   schedule:
-    - cron: '58 5 * * *'  # At 05:58
+    - cron: '50 5 * * *'  # At 05:50 UTC
 
 jobs:
   run:
