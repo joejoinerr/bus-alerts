@@ -9,6 +9,7 @@ def main():
     wymetro_ignore = {
         "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/firstbusleedsindustrialaction/",
         "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/leeds-city-centre-sweet-street/",
+        "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/sweetstreet/",
     }
 
     alert_services = [
