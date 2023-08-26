@@ -8,8 +8,9 @@ def main():
     services = {"2", "3", "3A"}
     wymetro_ignore = {
         "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/sweetstreet/",
-        "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/leedspride2023/",
         "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/leedswestindiancarnival/",
+        "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/parkfield-street-leeds/",
+        "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/calllane/",
     }
 
     alert_services = [
