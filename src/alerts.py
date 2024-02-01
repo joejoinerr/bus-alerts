@@ -125,7 +125,7 @@ class FirstBusAlertService:
         xml = fetch_text_from_url(self.ALERT_URL)
         rss = feedparser.parse(xml)
         for tweet in rss.entries:
-            if "service update" not in tweet.title.lower():
+            if "service alert" not in tweet.title.lower():
                 continue
             pub_timestamp = time.mktime(tweet.published_parsed)
             pub_date = datetime.datetime.fromtimestamp(pub_timestamp)
