@@ -8,6 +8,7 @@ def main():
     services = {"16"}
     wymetro_ignore = {
         "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/brooklands-avenue-seacroft/",
+        "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/leedsstpatricksday-1/",
     }
 
     alert_services = [
