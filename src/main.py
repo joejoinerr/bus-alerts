@@ -7,8 +7,7 @@ from notifiers import ConsoleNotifier, PushbulletNotifier
 def main():
     services = {"16"}
     wymetro_ignore = {
-        "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/brooklands-avenue-seacroft/",
-        "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/leedsstpatricksday-1/",
+        "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/kirkgate-leeds-city-centre-1/",
     }
 
     alert_services = [
