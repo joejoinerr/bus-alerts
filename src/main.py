@@ -8,6 +8,8 @@ def main():
     services = {"16"}
     wymetro_ignore = {
         "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/kirkgate-leeds-city-centre-1/",
+        "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/kirkgate-harper-street-leeds-city-centre-1/",
+        "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/stanningleybottomrichardshawlane/",
     }
 
     alert_services = [
