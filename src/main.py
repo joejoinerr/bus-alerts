@@ -9,8 +9,8 @@ def main():
     wymetro_ignore = {
         "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/kirkgate-leeds-city-centre-1/",
         "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/kirkgate-harper-street-leeds-city-centre-1/",
-        "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/henconnerlane/",
         "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/armleygyratory-3/",
+        "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/leedspride2024/",
     }
 
     alert_services = [
