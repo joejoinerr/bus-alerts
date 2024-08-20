@@ -20,7 +20,7 @@ def fetch_text_from_url(url: str) -> str:
         try:
             res = httpx.get(url, headers={"user-agent": requests_html.user_agent()})
             return res.text
-        except httpx.TransportError as e:
+        except (httpx.TransportError, httpx.ReadTimeout) as e:
             if i == attempts:
                 raise
             time.sleep(backoff)
