@@ -13,6 +13,12 @@ import requests_html
 BUS_REGEX = re.compile(r"\b[a-zA-Z]*\d+[a-zA-Z]*\b")
 
 
+def parse_services(services_text: str) -> set[str]:
+    *_, services_text = services_text.split(":", maxsplit=1)
+    services = BUS_REGEX.findall(services_text)
+        return set(services)
+
+
 def fetch_text_from_url(url: str) -> str:
     attempts: int = 3
     backoff: int = 1
@@ -50,12 +56,6 @@ class WYMetroAlertService:
         self.service_list = set() if not service_list else set(service_list)
         self.ignore_list = set() if not ignore_list else set(ignore_list)
 
-    @staticmethod
-    def _services_text_to_set(services_text: str) -> set[str]:
-        *_, services_text = services_text.split(":", maxsplit=1)
-        services = BUS_REGEX.findall(services_text)
-        return set(services)
-
     def _parse_alert(self, alert_html: requests_html.Element) -> ServiceAlert:
         alert_heading = alert_html.find("h3", first=True)
         alert_link = alert_heading.find("a", first=True).attrs["href"]
@@ -67,7 +67,7 @@ class WYMetroAlertService:
             authority=self.AUTHORITY_NAME,
             link=alert_link,
             description=alert_description,
-            affected_services=self._services_text_to_set(services_text),
+            affected_services=parse_services(services_text),
         )
 
     def find_alerts(self) -> Iterable[ServiceAlert]:
