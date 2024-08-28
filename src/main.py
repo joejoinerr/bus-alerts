@@ -15,11 +15,10 @@ def main():
 
     alert_services = [
         WYMetroAlertService(service_list=services, ignore_list=wymetro_ignore),
-        FirstBusAlertService(service_list=services),
+        # FirstBusAlertService(service_list=services),
     ]
 
     notifiers = [
-        # ConsoleNotifier(),
         PushbulletNotifier(
             key=os.environ["PUSHBULLET_API_KEY"], device_id="ujD4MLyzAqGsjyDuV8VNkq"
         ),
