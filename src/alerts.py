@@ -16,7 +16,7 @@ BUS_REGEX = re.compile(r"\b[a-zA-Z]*\d+[a-zA-Z]*\b")
 def parse_services(services_text: str) -> set[str]:
     *_, services_text = services_text.split(":", maxsplit=1)
     services = BUS_REGEX.findall(services_text)
-        return set(services)
+    return set(services)
 
 
 def fetch_text_from_url(url: str) -> str:
