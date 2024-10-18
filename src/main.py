@@ -11,6 +11,7 @@ def main():
         "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/kirkgate-harper-street-leeds-city-centre-1/",
         "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/armleygyratory-3/",
         "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/abbeydash-2/",
+        "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/lightnight/",
     }
 
     alert_services = [
