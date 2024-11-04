@@ -12,6 +12,8 @@ def main():
         "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/armleygyratory-3/",
         "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/abbeydash-2/",
         "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/lightnight/",
+        "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/wellingtonrd-1/",
+        "https://www.wymetro.com/plan-a-journey/travel-news/bus-travel-alerts/remembrancedayparadesleeds/",
     }
 
     alert_services = [
