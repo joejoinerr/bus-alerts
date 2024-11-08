@@ -57,6 +57,7 @@ dependencies = [
     { name = "feedparser" },
     { name = "html2text" },
     { name = "httpx" },
+    { name = "lxml-html-clean" },
     { name = "requests-html" },
 ]
 
@@ -70,6 +71,7 @@ requires-dist = [
     { name = "feedparser", specifier = ">=6.0.11" },
     { name = "html2text", specifier = ">=2024.2.26" },
     { name = "httpx", specifier = ">=0.27.2" },
+    { name = "lxml-html-clean", specifier = ">=0.3.1" },
     { name = "requests-html", specifier = ">=0.10.0" },
 ]
 
@@ -347,6 +349,18 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/68/de/96cb6d3269bc994b4f5ede8ca7bf0840f5de0a278bc6e50cb317ff71cafa/lxml-5.3.0-pp310-pypy310_pp73-manylinux_2_28_aarch64.whl", hash = "sha256:8dc2c0395bea8254d8daebc76dcf8eb3a95ec2a46fa6fae5eaccee366bfe02ce", size = 4218377 },
     { url = "https://files.pythonhosted.org/packages/a5/43/19b1ef6cbffa4244a217f95cc5f41a6cb4720fed33510a49670b03c5f1a0/lxml-5.3.0-pp310-pypy310_pp73-manylinux_2_28_x86_64.whl", hash = "sha256:6ba0d3dcac281aad8a0e5b14c7ed6f9fa89c8612b47939fc94f80b16e2e9bc83", size = 4351237 },
     { url = "https://files.pythonhosted.org/packages/ba/b2/6a22fb5c0885da3b00e116aee81f0b829ec9ac8f736cd414b4a09413fc7d/lxml-5.3.0-pp310-pypy310_pp73-win_amd64.whl", hash = "sha256:6e91cf736959057f7aac7adfc83481e03615a8e8dd5758aa1d95ea69e8931dba", size = 3487557 },
+]
+
+[[package]]
+name = "lxml-html-clean"
+version = "0.3.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "lxml" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/eb/c9/efd2064658c33d248a9522825dfb38c82619579754c0320103e632829b16/lxml_html_clean-0.3.1.tar.gz", hash = "sha256:d9f7d8ae36092f4ed5079cfbf95ff06d3c6fd04f4a861422ce251ece72d3c4b5", size = 20851 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0e/ae/2fc4fc394031ba4e474ae4e0da6822f601900f278f3fade5e9422897eb89/lxml_html_clean-0.3.1-py3-none-any.whl", hash = "sha256:081e6378c68ebb4113940ed82a3534c99e24ba1ca5ad5ce8868c7c4d264618f1", size = 13927 },
 ]
 
 [[package]]
