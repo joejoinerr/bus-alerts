@@ -29,14 +29,16 @@ def _setup_db(fp: os.PathLike) -> sqlite3.Connection:
     conn.row_factory = sqlite3.Row
 
     with conn:
-        conn.execute("""\
+        conn.execute(
+            """\
 CREATE TABLE IF NOT EXISTS sent_alerts(
     authority TEXT NOT NULL,
     description TEXT NOT NULL,
     affected_services TEXT NOT NULL,
     link TEXT,
     sent_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-)""")
+)"""
+        )
 
     return conn
 
@@ -49,7 +51,10 @@ def _save_alert_to_db(conn: sqlite3.Connection, alert: ServiceAlert) -> None:
         "link": alert.link,
     }
     with conn:
-        conn.execute("INSERT INTO sent_alerts(authority, description, affected_services, link) VALUES(:authority, :description, :affected_services, :link)", alert_flat)
+        conn.execute(
+            "INSERT INTO sent_alerts(authority, description, affected_services, link) VALUES(:authority, :description, :affected_services, :link)",
+            alert_flat,
+        )
 
 
 def _load_alerts_from_db(conn: sqlite3.Connection) -> list[ServiceAlert]:
@@ -58,7 +63,11 @@ def _load_alerts_from_db(conn: sqlite3.Connection) -> list[ServiceAlert]:
         rows = cur.fetchall()
     alerts = []
     for row in rows:
-        affected_services = set(clean_service for service in row["affected_services"].split(",") if (clean_service := service.strip()))
+        affected_services = set(
+            clean_service
+            for service in row["affected_services"].split(",")
+            if (clean_service := service.strip())
+        )
         parsed_alert = ServiceAlert(
             authority=row["authority"],
             description=row["description"],
@@ -69,7 +78,9 @@ def _load_alerts_from_db(conn: sqlite3.Connection) -> list[ServiceAlert]:
     return alerts
 
 
-def _create_wymetro_ignore_list(config: BusAlertsConfig, sent_alerts: list[ServiceAlert] | None = None) -> set[str]:
+def _create_wymetro_ignore_list(
+    config: BusAlertsConfig, sent_alerts: list[ServiceAlert] | None = None
+) -> set[str]:
     if not sent_alerts:
         return config.ignore_urls
 
@@ -92,7 +103,9 @@ def main() -> None:
 
     with contextlib.closing(conn):
         sent_alerts = _load_alerts_from_db(conn)
-        ignore_list = _create_wymetro_ignore_list(config=config, sent_alerts=sent_alerts)
+        ignore_list = _create_wymetro_ignore_list(
+            config=config, sent_alerts=sent_alerts
+        )
 
         alert_services = [
             WYMetroAlertService(service_list=config.services, ignore_list=ignore_list),

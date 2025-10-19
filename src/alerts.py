@@ -24,7 +24,9 @@ def fetch_text_from_url(url: str) -> str:
     backoff: int = 1
     for i in range(1, attempts + 1):
         try:
-            res = httpx.get(url, headers={"user-agent": requests_html.user_agent()}, timeout=30)
+            res = httpx.get(
+                url, headers={"user-agent": requests_html.user_agent()}, timeout=30
+            )
             return res.text
         except (httpx.TransportError, httpx.ReadTimeout) as e:
             if i == attempts:
@@ -32,7 +34,6 @@ def fetch_text_from_url(url: str) -> str:
             time.sleep(backoff)
             backoff *= 2
             continue
-
 
 
 @dataclasses.dataclass

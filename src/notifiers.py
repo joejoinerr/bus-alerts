@@ -6,7 +6,7 @@ from alerts import ServiceAlert
 class ConsoleNotifier:
     def notify(self, alert: ServiceAlert):
         message = (
-            f"\N{Bus} Service alert for {alert.authority}: "
+            f"\N{BUS} Service alert for {alert.authority}: "
             f'{", ".join(alert.affected_services)}\n{alert.description}'
         )
         if alert.link:
@@ -25,7 +25,7 @@ class PushbulletNotifier:
         data = {
             "type": "link" if alert.link else "note",
             "title": (
-                f"\N{Bus} Service alert for {alert.authority}: "
+                f"\N{BUS} Service alert for {alert.authority}: "
                 f'{", ".join(alert.affected_services)}'
             ),
             "body": alert.description,

@@ -13,3 +13,7 @@ dependencies = [
     "pydantic>=2.12.3",
 ]
 
+[dependency-groups]
+dev = [
+    "pre-commit>=4.3.0",
+]
