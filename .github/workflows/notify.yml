@@ -10,23 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo content
-        uses: actions/checkout@v3
-
-      - name: Install Poetry
-        uses: snok/install-poetry@v1
-        with:
-          version: 1.8.5
+        uses: actions/checkout@v5
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.10'
-          cache: 'poetry'
+          python-version-file: ".python-version"
 
-      - name: Install dependencies
-        run: poetry install
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          version: 0.9.4
 
       - name: Execute py script
         env:
           PUSHBULLET_API_KEY: ${{ secrets.PUSHBULLET_API_KEY }}
-        run: poetry run python src/main.py
+        run: uv run --locked --no-dev src/main.py
