@@ -17,6 +17,25 @@ jobs:
         with:
           python-version-file: ".python-version"
 
+      # Step to get the latest artifact run ID
+      # Fetch the latest artifact run ID using GitHub API and jq
+      # Save the run ID as an environment variable
+      # If your repository is set to private, an OAuth app token or personal access token (classic) with repo scope is required
+      - name: Get latest artifact run id
+        run: |
+          ARTIFACT_RUN_ID=$(curl -s "https://api.github.com/repos/${{ github.repository }}/actions/artifacts?per_page=1" | jq '.artifacts[0].workflow_run.id')
+          echo "ARTIFACT_RUN_ID=$ARTIFACT_RUN_ID" >> $GITHUB_ENV
+
+      # Download the artifact (our SQLite DB!) from the last run
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: bus-alerts-db
+          path: .
+          run-id: ${{ env.ARTIFACT_RUN_ID }} # Run ID of the artifact (SQLite DB) uploaded from the last run
+          github-token: ${{ secrets.GH_PAT  }} # REQUIRED. See https://github.com/actions/download-artifact?tab=readme-ov-file#download-artifacts-from-other-workflow-runs-or-repositories
+        continue-on-error: true # Set this to false after the first run
+
       - name: Install uv
         uses: astral-sh/setup-uv@v6
         with:
@@ -26,3 +45,10 @@ jobs:
         env:
           PUSHBULLET_API_KEY: ${{ secrets.PUSHBULLET_API_KEY }}
         run: uv run --locked --no-dev src/main.py
+
+      - name: Upload updated artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bus-alerts-db # Name of the artifact to upload, make sure to match the name in the download step
+          path: ./storage.db
+          if-no-files-found: error
