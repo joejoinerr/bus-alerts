@@ -8,6 +8,9 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
+
     steps:
       - name: Checkout repo content
         uses: actions/checkout@v5
@@ -33,7 +36,7 @@ jobs:
           name: bus-alerts-db
           path: .
           run-id: ${{ env.ARTIFACT_RUN_ID }} # Run ID of the artifact (SQLite DB) uploaded from the last run
-          github-token: ${{ secrets.GH_PAT  }} # REQUIRED. See https://github.com/actions/download-artifact?tab=readme-ov-file#download-artifacts-from-other-workflow-runs-or-repositories
+          github-token: ${{ secrets.GITHUB_TOKEN }} # REQUIRED. See https://github.com/actions/download-artifact?tab=readme-ov-file#download-artifacts-from-other-workflow-runs-or-repositories
         continue-on-error: true # Set this to false after the first run
 
       - name: Install uv
